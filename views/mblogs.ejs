@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Blog post</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="../css/bootstrap.min.css">
+  <link rel="stylesheet" href="../css/line-icons.css">
+  <link rel="stylesheet" href="../css/owl.carousel.css">
+  <link rel="stylesheet" href="../css/owl.theme.css">
+  <link rel="stylesheet" href="../css/nivo-lightbox.css">
+  <link rel="stylesheet" href="../css/magnific-popup.css">
+  <link rel="stylesheet" href="../css/animate.css">
+  <link rel="stylesheet" href="../css/color-switcher.css">
+  <link rel="stylesheet" href="../css/menu_sideslide.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+
+  <link rel="icon" href="../img/slider/tt.png" type="image/gif" sizes="16x16">
+  <link rel="stylesheet" href="../css/blogs.css" type="text/css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+  <title>Blogs</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-md fixed-top scrolling-navbar bg-white" style="margin-bottom:0">
+    <div class="container">
+      <a class="navbar-brand" href="../index.html">
+        <span><img src="../img/slider/tt.png" style="width:40px;height:40px;display:inline" /></span>Tech Tomatoes</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="lni-menu"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto w-100 justify-content-end">
+          <li class="nav-item">
+            <a class="nav-link page-scroll" href="#slider-area">Blogs</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link page-scroll" href="../index.html">Home</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div style="display: flex;justify-content: center; margin:2cm; flex-wrap:wrap">
+    <% for( let index = 0; index < data.length; index++ ) { %>
+    <div class="card" style="width: 18rem;margin:0.75cm">
+      <div class="card-body">
+        <h4 class="card-title"> <%= data[index].title %> </h4>
+
+        <p class="card-text">its always good to read full content therefore click on the link to go to see the full content.</p>
+        <a href=/separate/<%=index %> class="card-link">See full</a>
+      </div>
+    </div>
+    <% } %>
+  </div>
+
+</body>
+
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link rel="icon" href="img/slider/tt.png">
+<title>Blog post</title>
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="../data.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+  <script src="https://cdn.tiny.cloud/1/92jwq2q0fwgktr1g2myre5f3haveyjcv8xt7yt8c4y2sk0hc/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+  <script type="text/javascript">
+  tinymce.init({
+   setup:function(ed) {
+       ed.on('change', function(e) {
+          console.log('the content ', ed.getContent());
+       })
+   },
+    selector: '#myTextarea',
+    plugins: [
+      'advlist autolink link image lists charmap print preview hr anchor pagebreak',
+      'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking',
+      'table emoticons template paste help'
+    ],
+    toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | ' +
+      'bullist numlist outdent indent | link image | print preview media fullpage | ' +
+      'forecolor backcolor emoticons | help',
+    menu: {
+      favs: {title: 'My Favorites', items: 'code visualaid | searchreplace | emoticons'}
+    },
+    menubar: 'favs file edit view insert format tools table help',
+    content_css: 'css/content.css'
+  });
+  </script>
+ 
+  <script>
+   const obj={author:'',title:'',content:''};
+    function Submiting(e){
+    e.preventDefault();
+    var content=tinyMCE.activeEditor.getContent();
+    var total=$('form').serializeArray();
+    total[2]['value']=content;
+    obj['author']=total[0]['value'];
+    obj['title']=total[1]['value'];
+    obj['content']=total[2]['value'];
+    var postListRef = firebase.database().ref('users');
+    var newPostRef = postListRef.push();
+    newPostRef.set(obj);
+    console.log(obj);
+    $.ajax({
+        type: "POST",
+        url: "/blog/form",
+        data: "author=" + obj['author'] + "&title=" +obj['title']+ "&content=" + obj['content'] ,
+        success : function(text){
+          console.log(text);
+        },
+        error:function(text){
+          console.log(text);
+        }
+        });
+   return false;
+    }
+  </script>
+</head>
+<body>
+ 
+  <form id='get-form' method='post' onsubmit="return Submiting(event)">
+ <div class="form-group">
+    <label for="inputdefault">Author</label>
+    <input class="form-control" id="inputdefault" name="name" type="text" placeholder="e.g. Mr. kamlesh kumar">
+     <label for="inputdefault">context</label>
+    <input class="form-control" id="inputdefault" type="text" name="sub" placeholder="e.g, Benifits of Banyan tree">
+ </div>
+    <textarea id="myTextarea" rows="60" name="blog" placeholder="This will be your main blog which will be shown"></textarea>
+  <button type="submit" style="margin:5px" class="btn btn-primary btn-block">Post</button>
+</form>
+<div id="data-container">
+    </div>  
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<!-- <script src="https://firsttime-3ac0b-default-rtdb.firebaseio.com/"></script> -->
+<script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+<script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-database.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+
+  var firebaseConfig = {
+    apiKey: "AIzaSyD6dsU311LEUTDQhF7ly_JI_Vl1o2dXPR0",
+    authDomain: "firsttime-3ac0b.firebaseapp.com",
+    databaseURL: "https://firsttime-3ac0b-default-rtdb.firebaseio.com",
+    projectId: "firsttime-3ac0b",
+    storageBucket: "firsttime-3ac0b.appspot.com",
+    messagingSenderId: "635297673380",
+    appId: "1:635297673380:web:a25e0dfeb02efe957e7631",
+    measurementId: "G-T6NZ24G67L"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+ 
+</script>
+<script>
+
+  var content=tinyMCE.activeEditor.getContent();
+  console.log(content);
+</script>
+</body>
+
+</html>
